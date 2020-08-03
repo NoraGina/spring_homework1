@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="englishSpeakerDAOId" class="com.sda.gina.di.dao.EnglishSpeakerDAO"></bean>
+    <bean id="frenchSpeakerDAOId" class="com.sda.gina.di.dao.FrenchSpeakerDAO"></bean>
+
+    <bean id="englishSpeakerService" class = "com.sda.gina.di.service.SpeakerService" >
+        <constructor-arg name="speaker" ref="englishSpeakerDAOId"></constructor-arg>
+    </bean>
+
+    <bean id="frenchSpeakerService" class = "com.sda.gina.di.service.SpeakerService" >
+                 <constructor-arg name="speaker" ref="frenchSpeakerDAOId" ></constructor-arg>
+    </bean>
+
+    <bean id="fileWriterDAOId" class="com.sda.gina.di.dao.FileWriterDAO"></bean>
+    <bean id="consoleWriterDAOId" class="com.sda.gina.di.dao.ConsoleWriterDAO"></bean>
+    <bean id="fileWriterService" class="com.sda.gina.di.service.WriterService">
+        <constructor-arg name="writerDAO" ref="fileWriterDAOId"></constructor-arg>
+    </bean>
+    <bean id="consoleWriterService" class="com.sda.gina.di.service.WriterService">
+        <constructor-arg name="writerDAO" ref="consoleWriterDAOId"></constructor-arg>
+    </bean>
+
+
+    <bean id = "speakerServiceEngFile" class="com.sda.gina.di.service.SpeakerService">
+        <constructor-arg name="speaker" ref="englishSpeakerDAOId" index="0"></constructor-arg>
+        <constructor-arg name="writerDAO" ref ="fileWriterDAOId" index="1"></constructor-arg>
+    </bean>
+
+    <bean id = "speakerServiceEngCon" class="com.sda.gina.di.service.SpeakerService">
+        <constructor-arg name="speaker" ref="englishSpeakerDAOId" index="0"></constructor-arg>
+        <constructor-arg name="writerDAO" ref ="consoleWriterDAOId" index="1"></constructor-arg>
+    </bean>
+
+    <bean id = "speakerServiceFreFil" class="com.sda.gina.di.service.SpeakerService">
+        <constructor-arg name="speaker" ref="frenchSpeakerDAOId" index="0"></constructor-arg>
+        <constructor-arg name="writerDAO" ref ="fileWriterDAOId" index="1"></constructor-arg>
+    </bean>
+
+    <bean id = "speakerServiceFreCon" class="com.sda.gina.di.service.SpeakerService">
+        <constructor-arg name="speaker" ref="frenchSpeakerDAOId" index="0"></constructor-arg>
+        <constructor-arg name="writerDAO" ref ="consoleWriterDAOId" index="1"></constructor-arg>
+    </bean>
+
+</beans>
